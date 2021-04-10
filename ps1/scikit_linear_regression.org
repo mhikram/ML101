@@ -25,6 +25,7 @@ The class sklearn.linear_model.LinearRegression will be used to perform linear a
 #+BEGIN_COMMENT
 #+begin_src python :results file :exports results
 #+END_COMMENT
+
 #+begin_src python
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -69,12 +70,16 @@ plt.savefig(filename)
 return (filename)
 #+end_src
 
-[[file:LinearRegression.png]]
+    [[file:LinearRegression.png]]
 
 * Polynomial Linear Regression with scikit [fn:3]
 :PROPERTIES:
   :header-args: :python /home/hamza/.virtualenvs/ml101/bin/python3.8
   :END:
+
+#+BEGIN_COMMENT
+#+begin_src python :results file :exports results
+#+END_COMMENT
 
 #+begin_src python
 import numpy as np
@@ -127,7 +132,7 @@ plt.savefig(filename)
 return (filename)
 #+end_src
 
-#+RESULTS:
+
 [[file:PolyRegression.png]]
 
 * Alternative with Statsmodel
