@@ -24,15 +24,62 @@ The class sklearn.linear_model.LinearRegression will be used to perform linear a
 #+NAME:housing
 | Living Area (feet^2) | Price ($1000s) |
 |----------------------+----------------|
-|                 2104 |            400 |
-|                 1600 |            330 |
+|                 2104 |            399 |
+|                 1600 |            329 |
 |                 2400 |            369 |
 |                 1416 |            232 |
+|                 3000 |            539 |
+|                 1985 |            299 |
+|                 1534 |            314 |
+|                 1427 |            198 |
+|                 1380 |            212 |
+|                 1494 |            242 |
+|                 1940 |            239 |
+|                 2000 |            347 |
+|                 1890 |            329 |
+|                 4478 |            699 |
+|                 1268 |            259 |
+|                 2300 |            449 |
+|                 1320 |            299 |
+|                 1236 |            199 |
+|                 2609 |            499 |
+|                 3031 |            599 |
+|                 1767 |            252 |
+|                 1888 |            255 |
+|                 1604 |            242 |
+|                 1962 |            259 |
+|                 3890 |            573 |
+|                 1100 |            249 |
+|                 1458 |            464 |
+|                 2526 |            469 |
+|                 2200 |            475 |
+|                 2637 |            299 |
+|                 1839 |            349 |
+|                 1000 |            169 |
+|                 2040 |            314 |
+|                 3137 |            579 |
+|                 1811 |            285 |
+|                 1437 |            249 |
+|                 1239 |            229 |
+|                 2132 |            345 |
+|                 4215 |            549 |
+|                 2162 |            287 |
+|                 1664 |            368 |
+|                 2238 |            329 |
+|                 2567 |            314 |
+|                 1200 |            299 |
+|                  852 |            799 |
+|                 1852 |            299 |
+|                 1203 |            239 |
 
 
-#+begin_src python
+
+
+
+#+begin_src python :results file :exports results :var data=housing
 import numpy as np
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
 x = np.array(
@@ -54,20 +101,87 @@ r_sq = model.score(x, y)
 intercept = model.intercept_
 slope = model.coef_
 
+title = 'Score = {}, Intercept={}'.format(round(r_sq,2), round(intercept,2))
+
 y_pred = model.predict(x)
 
-plt.scatter(x,y)
+plt.scatter(x,y, label="training data")
 plt.plot(x, y_pred)
 
+title = 'Score = {}, Intercept={}'.format(round(r_sq,2), round(intercept,2))
+plt.title(
+    "Linear Regression using scikit-learn\n" + title, fontsize=10
+)
+
 filename = "LinearRegression.png"
+plt.savefig(filename)
+
+return (filename    )
+#+end_src
+
+#+RESULTS:
+[[file:LinearRegression.png]]
+
+* Polynomial Linear Regression with scikit [fn:3]
+:PROPERTIES:
+  :header-args: :python /home/hamza/.virtualenvs/ml101/bin/python3.8
+  :END:
+
+#+begin_src python :results file :exports results :var data=housing
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+import matplotlib.pyplot as plt
+
+x = np.array(
+    [a[0] for a in data]).reshape((-1, 1))
+
+y = np.array([a[1] for a in data])
+
+transformer = PolynomialFeatures(
+    degree=2,
+    include_bias=False,
+    interaction_only = False
+)
+
+x_ = transformer.fit_transform(x)
+
+model = LinearRegression(
+    fit_intercept=True,
+    normalize=False,
+    copy_X=True,
+    n_jobs=None,
+    positive=False
+)
+
+model.fit(x_, y)
+
+y_pred = model.predict(x_)
+
+plt.scatter(x,y)
+plt.scatter(x, y_pred)
+
+r_sq = model.score(x_, y)
+intercept = model.intercept_
+slope = model.coef_
+
+title = 'Score = {}, Intercept={}'.format(round(r_sq,2), round(intercept,2))
+plt.title(
+    "Linear Regression using scikit-learn\n" + title, fontsize=10
+)
+
+filename = "PolyRegression.png"
 plt.savefig(filename)
 
 return (filename)
 #+end_src
 
-[[file:LinearRegression.png]]
+#+RESULTS:
+[[file:PolyRegression.png]]
 
-
+* Alternative with Statsmodel
+https://realpython.com/linear-regression-in-python/#advanced-linear-regression-with-statsmodels
 
 [fn:1] [[https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html][sklearn linear regression documentation]]
 [fn:2] [[https://github.com/scikit-learn/scikit-learn/blob/95119c13a/sklearn/linear_model/_base.py#L391][sklearn linear_model source]]
+[fn:3] Good reference to label plots https://moonbooks.org/Articles/How-to-implement-a-polynomial-linear-regression-using-scikit-learn-and-python-3-/
