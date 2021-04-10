@@ -1,0 +1,80 @@
+#+TITLE: Scikit Linear Regression
+
+* Simple Linear Regression With scikit-learn
+:PROPERTIES:
+  :header-args: :python /home/hamza/.virtualenvs/ml101/bin/python3.8
+  :END:
+Let’s start with the simplest case, which is simple linear regression.
+
+There are five basic steps when you’re implementing linear regression:
+
+- Import the packages and classes you need.
+- Provide data to work with and eventually do appropriate transformations.
+- Create a regression model and fit it with existing data.
+- Check the results of model fitting to know whether the model is satisfactory.
+- Apply the model for predictions.
+- These steps are more or less general for most of the regression approaches and implementations.
+
+** Step 1: Import packages and classes
+The first step is to import the package numpy and the class LinearRegression from sklearn.linear_model:
+
+#+NAME:housing
+| Living Area (feet^2) | Price ($1000s) |
+|----------------------+----------------|
+|                 2104 |            400 |
+|                 1600 |            330 |
+|                 2400 |            369 |
+|                 1416 |            232 |
+
+
+#+begin_src python :results file :exports results :var data=housing
+import numpy as np
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+x = np.array(
+    [a[0] for a in data]).reshape((-1, 1))
+
+y = np.array([a[1] for a in data])
+
+model = LinearRegression(
+    fit_intercept=True,
+    normalize=False,
+    copy_X=True,
+    n_jobs=None,
+    positive=False
+)
+
+model.fit(x, y)
+
+r_sq = model.score(x, y)
+intercept = model.intercept_
+slope = model.coef_
+
+y_pred = model.predict(x)
+
+plt.scatter(x,y)
+plt.plot(x, y_pred)
+
+filename = "LinearRegression.png"
+plt.savefig(filename)
+
+return (filename)
+#+end_src
+
+#+RESULTS:
+[[file:LinearRegression.png]]
+
+
+
+
+
+
+Now, you have all the functionalities you need to implement linear regression.
+
+The fundamental data type of NumPy is the array type called numpy.ndarray. The rest of this article uses the term array to refer to instances of the type numpy.ndarray.
+
+The class sklearn.linear_model.LinearRegression will be used to perform linear and polynomial regression and make predictions accordingly. [fn: 1] [fn: 2]
+
+[fn: 1] [[https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html][sklearn linear regression documentation]]
+[fn: 2] [[https://github.com/scikit-learn/scikit-learn/blob/95119c13a/sklearn/linear_model/_base.py#L391][sklearn linear_model source]]
