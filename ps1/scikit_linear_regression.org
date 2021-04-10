@@ -1,6 +1,6 @@
 #+TITLE: Scikit Linear Regression
 
-* COMMENT Simple Linear Regression With scikit-learn
+* Simple Linear Regression With scikit-learn
 :PROPERTIES:
   :header-args: :python /home/hamza/.virtualenvs/ml101/bin/python3.8
   :END:
