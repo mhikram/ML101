@@ -30,7 +30,7 @@ The class sklearn.linear_model.LinearRegression will be used to perform linear a
 |                 1416 |            232 |
 
 
-#+begin_src python :results file :exports results :var data=housing
+#+begin_src python
 import numpy as np
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
@@ -65,12 +65,7 @@ plt.savefig(filename)
 return (filename)
 #+end_src
 
-#+RESULTS:
 [[file:LinearRegression.png]]
-
-
-
-
 
 
 
