@@ -15,8 +15,11 @@ There are five basic steps when you’re implementing linear regression:
 - Apply the model for predictions.
 - These steps are more or less general for most of the regression approaches and implementations.
 
-** Step 1: Import packages and classes
-The first step is to import the package numpy and the class LinearRegression from sklearn.linear_model:
+Now, you have all the functionalities you need to implement linear regression.
+
+The fundamental data type of NumPy is the array type called numpy.ndarray. The rest of this article uses the term array to refer to instances of the type numpy.ndarray.
+
+The class sklearn.linear_model.LinearRegression will be used to perform linear and polynomial regression and make predictions accordingly. [fn:1] [fn:2]
 
 #+NAME:housing
 | Living Area (feet^2) | Price ($1000s) |
@@ -70,11 +73,6 @@ return (filename)
 
 
 
-Now, you have all the functionalities you need to implement linear regression.
 
-The fundamental data type of NumPy is the array type called numpy.ndarray. The rest of this article uses the term array to refer to instances of the type numpy.ndarray.
-
-The class sklearn.linear_model.LinearRegression will be used to perform linear and polynomial regression and make predictions accordingly. [fn: 1] [fn: 2]
-
-[fn: 1] [[https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html][sklearn linear regression documentation]]
-[fn: 2] [[https://github.com/scikit-learn/scikit-learn/blob/95119c13a/sklearn/linear_model/_base.py#L391][sklearn linear_model source]]
+[fn:1] [[https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html][sklearn linear regression documentation]]
+[fn:2] [[https://github.com/scikit-learn/scikit-learn/blob/95119c13a/sklearn/linear_model/_base.py#L391][sklearn linear_model source]]
