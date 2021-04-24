@@ -1,4 +1,4 @@
-% Created 2021-04-25 Sun 01:51
+% Created 2021-04-25 Sun 01:57
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -49,7 +49,7 @@ Section & Part & Submitted Function & Points\\
 \end{center}
 
 \section{Simple python and numpy function}
-\label{sec:org2564d6c}
+\label{sec:orgf153b4d}
 The first part of this assignment gives you practice with python and numpy syntax and the homework submission process. In the next code block, you will find the outline of a python function. Modify it to return a 5 x 5 identity matrix by filling in the following code:
 
 A = np.eye(5)
@@ -89,7 +89,7 @@ array([[ 1.,  0.,  0.,  0.,  0.],
 \end{verbatim}
 
 \section{Linear regression with one variable}
-\label{sec:org50a91f8}
+\label{sec:org00975d8}
 Now you will implement linear regression with one variable to predict profits for a food truck. Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet. The chain already has trucks in various cities and you have data for profits and populations from the cities. You would like to use this data to help you select which city to expand to next.
 
 The file Data/ex1data1.txt contains the dataset for our linear regression problem. The first column is the population of a city (in 10,000s) and the second column is the profit of a food truck in that city (in \$10,000s). A negative value for profit indicates a loss.
@@ -106,7 +106,7 @@ m = y.size  # number of training examples
 
 \end{verbatim}
 \subsection{Plotting the Data}
-\label{sec:org5894f23}
+\label{sec:orga230c27}
 Before starting on any task, it is often useful to understand the data by visualizing it. For this dataset, you can use a scatter plot to visualize the data, since it has only two properties to plot (profit and population). Many other problems that you will encounter in real life are multi-dimensional and cannot be plotted on a 2-d plot. There are many plotting libraries in python (see this \href{https://mode.com/blog/python-data-visualization-libraries/}{blog} post for a good summary of the most popular ones).
 
 In this course, we will be mostly be using matplotlib to do all our plotting. matplotlib is one of the most popular scientific plotting libraries in python and has extensive tools and functions to make beautiful plots. pyplot is a module within matplotlib which provides a simplified interface to matplotlib's most common plotting tasks, mimicking MATLAB's plotting interface.
@@ -148,7 +148,7 @@ def plotData(x, y):
     # =============================================================
 \end{verbatim}
 \subsection{Gradient Descent}
-\label{sec:orgbb0d986}
+\label{sec:orgba1839f}
 In this part, you will fit the linear regression parameters \(\theta\) to our dataset using gradient descent.
 
 2.2.1 Update Equations
@@ -257,15 +257,15 @@ plotData(X[:, 1], y)
 pyplot.plot(X[:, 1], np.dot(X, theta), '-')
 pyplot.legend(['Training data', 'Linear regression']);
 \end{verbatim}
-\subsection{Linear regression with multiple variables}
-\label{sec:org4b671dc}
+\section{Linear regression with multiple variables}
+\label{sec:org462d5a5}
 In this part, you will implement linear regression with multiple variables to predict the prices of houses. Suppose you are selling your house and you want to know what a good market price would be. One way to do this is to first collect information on recent houses sold and make a model of housing prices.
 
 The file Data/ex1data2.txt contains a training set of housing prices in Portland, Oregon. The first column is the size of the house (in square feet), the second column is the number of bedrooms, and the third column is the price of the house.
 
 
-\subsubsection{Feature Normalization}
-\label{sec:org6f0a7df}
+\subsection{Feature Normalization}
+\label{sec:org8fe983a}
 We start by loading and displaying some values from this dataset. By looking at the values, note that house sizes are about 1000 times the number of bedrooms. When features differ by orders of magnitude, first performing feature scaling can make gradient descent converge much more quickly.
 
 \begin{verbatim}
@@ -354,7 +354,8 @@ After the featureNormalize function is tested, we now add the intercept term to 
 X = np.concatenate([np.ones((m, 1)), X_norm], axis=1)
 
 \end{verbatim}
-3.2 Gradient Descent
+\subsection{Gradient Descent}
+\label{sec:org38df41d}
 
 Previously, you implemented gradient descent on a univariate regression problem. The only difference now is that there is one more feature in the matrix \(X\). The hypothesis function and the batch gradient descent update rule remain unchanged.
 

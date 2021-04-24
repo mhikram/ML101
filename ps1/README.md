@@ -1,12 +1,13 @@
 
 # Table of Contents
 
-1.  [Simple python and numpy function](#org0d94849)
-2.  [Linear regression with one variable](#org1016dc0)
-    1.  [Plotting the Data](#org983a6b9)
-    2.  [Gradient Descent](#org1d84c75)
-    3.  [Linear regression with multiple variables](#orgdf6ce28)
-        1.  [Feature Normalization](#org271c5c2)
+1.  [Simple python and numpy function](#org6c9ae93)
+2.  [Linear regression with one variable](#org672dd81)
+    1.  [Plotting the Data](#org58acd94)
+    2.  [Gradient Descent](#org48d150f)
+3.  [Linear regression with multiple variables](#org865a94f)
+    1.  [Feature Normalization](#orgb4770c9)
+    2.  [Gradient Descent](#org8910476)
 
 \clearpage
 In this exercise, you will implement linear regression and get to see it work on data.
@@ -92,7 +93,7 @@ All the information you need for solving this assignment is in directory.
 </table>
 
 
-<a id="org0d94849"></a>
+<a id="org6c9ae93"></a>
 
 # Simple python and numpy function
 
@@ -131,7 +132,7 @@ The previous code block only defines the function warmUpExercise. Run it by exec
            [ 0.,  0.,  0.,  0.,  1.]])
 
 
-<a id="org1016dc0"></a>
+<a id="org672dd81"></a>
 
 # Linear regression with one variable
 
@@ -150,7 +151,7 @@ You are provided with the code needed to load this data. The dataset is loaded f
     m = y.size  # number of training examples
 
 
-<a id="org983a6b9"></a>
+<a id="org58acd94"></a>
 
 ## Plotting the Data
 
@@ -195,7 +196,7 @@ In this course, we will be mostly be using matplotlib to do all our plotting. ma
         # =============================================================
 
 
-<a id="org1d84c75"></a>
+<a id="org48d150f"></a>
 
 ## Gradient Descent
 
@@ -302,18 +303,18 @@ We will use your final parameters to plot the linear fit.
     pyplot.legend(['Training data', 'Linear regression']);
 
 
-<a id="orgdf6ce28"></a>
+<a id="org865a94f"></a>
 
-## Linear regression with multiple variables
+# Linear regression with multiple variables
 
 In this part, you will implement linear regression with multiple variables to predict the prices of houses. Suppose you are selling your house and you want to know what a good market price would be. One way to do this is to first collect information on recent houses sold and make a model of housing prices.
 
 The file Data/ex1data2.txt contains a training set of housing prices in Portland, Oregon. The first column is the size of the house (in square feet), the second column is the number of bedrooms, and the third column is the price of the house.
 
 
-<a id="org271c5c2"></a>
+<a id="orgb4770c9"></a>
 
-### Feature Normalization
+## Feature Normalization
 
 We start by loading and displaying some values from this dataset. By looking at the values, note that house sizes are about 1000 times the number of bedrooms. When features differ by orders of magnitude, first performing feature scaling can make gradient descent converge much more quickly.
 
@@ -397,7 +398,10 @@ After the featureNormalize function is tested, we now add the intercept term to 
     # Add intercept term to X
     X = np.concatenate([np.ones((m, 1)), X_norm], axis=1)
 
-3.2 Gradient Descent
+
+<a id="org8910476"></a>
+
+## Gradient Descent
 
 Previously, you implemented gradient descent on a univariate regression problem. The only difference now is that there is one more feature in the matrix \(X\). The hypothesis function and the batch gradient descent update rule remain unchanged.
 
