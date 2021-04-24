@@ -1,35 +1,7 @@
-% Created 2021-04-25 Sun 02:17
-% Intended LaTeX compiler: pdflatex
-\documentclass[12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{graphicx}
-\usepackage{grffile}
-\usepackage{longtable}
-\usepackage{wrapfig}
-\usepackage{rotating}
-\usepackage[normalem]{ulem}
-\usepackage{amsmath}
-\usepackage{textcomp}
-\usepackage{amssymb}
-\usepackage{capt-of}
-\usepackage{hyperref}
-\usepackage[margin=1.25in]{geometry}
-\usepackage{parskip}
-\author{Muhammad Hamza Ikram}
-\date{\today}
-\title{Problem Set 1}
-\hypersetup{
- pdfauthor={Muhammad Hamza Ikram},
- pdftitle={Problem Set 1},
- pdfkeywords={},
- pdfsubject={},
- pdfcreator={Emacs 27.2 (Org mode 9.5)}, 
- pdflang={English}}
-\begin{document}
-
-\maketitle
-\tableofcontents
+#+LATEX_HEADER: \usepackage[margin=1.25in]{geometry}
+#+LATEX_HEADER: \usepackage{parskip}
+#+latex_class_options: [12pt]
+#+TITLE: Problem Set 1
 
 \clearpage
 In this exercise, you will implement linear regression and get to see it work on data.
@@ -37,26 +9,21 @@ In this exercise, you will implement linear regression and get to see it work on
 All the information you need for solving this assignment is in directory.
 
 
-\begin{center}
-\begin{tabular}{rllr}
-Section & Part & Submitted Function & Points\\
-1 & Warm up exercise & warmUpExercise & 10\\
-2 & Compute cost for one variable & computeCost & 40\\
-3 & Gradient descent for one variable & gradientDescent & 50\\
-4 & Feature normalization & featureNormalize & 10\\
-5 & Compute Cost for multiple variables & computeCostMulti & 20\\
-6 & Gradient descent for multiple variables & gradientDescentMulti & 20\\
- &  & Total Points & 150\\
-\end{tabular}
-\end{center}
+| Section | Part                                    | Submitted Function   | Points |
+|       1 | Warm up exercise                        | warmUpExercise       |     10 |
+|       2 | Compute cost for one variable           | computeCost          |     40 |
+|       3 | Gradient descent for one variable       | gradientDescent      |     50 |
+|       4 | Feature normalization                   | featureNormalize     |     10 |
+|       5 | Compute Cost for multiple variables     | computeCostMulti     |     20 |
+|       6 | Gradient descent for multiple variables | gradientDescentMulti |     20 |
+|         |                                         | Total Points         |    150 |
 
-\section{Simple python and numpy function}
-\label{sec:orgcd65be1}
+* Simple python and numpy function
 The first part of this assignment gives you practice with python and numpy syntax and the homework submission process. In the next code block, you will find the outline of a python function. Modify it to return a 5 x 5 identity matrix by filling in the following code:
 
 A = np.eye(5)
 
-\begin{verbatim}
+#+begin_src python
 
 def warmUpExercise(
         matrix
@@ -79,25 +46,24 @@ def warmUpExercise(
     # ==============================
     return identity
 
-\end{verbatim}
+#+end_src
 The previous code block only defines the function warmUpExercise. Run it by executing it in your own script. You should see output similar to the following for a 5x5 input matrix:
-\begin{verbatim}
+#+begin_src python
 array([[ 1.,  0.,  0.,  0.,  0.],
        [ 0.,  1.,  0.,  0.,  0.],
        [ 0.,  0.,  1.,  0.,  0.],
        [ 0.,  0.,  0.,  1.,  0.],
        [ 0.,  0.,  0.,  0.,  1.]])
 
-\end{verbatim}
+#+end_src
 
-\section{Linear regression with one variable}
-\label{sec:orgf322211}
+* Linear regression with one variable
 Now you will implement linear regression with one variable to predict profits for a food truck. Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet. The chain already has trucks in various cities and you have data for profits and populations from the cities. You would like to use this data to help you select which city to expand to next.
 
-The file Data/ex1data1.txt contains the dataset for our linear regression problem. The first column is the population of a city (in 10,000s) and the second column is the profit of a food truck in that city (in \$10,000s). A negative value for profit indicates a loss.
+The file Data/ex1data1.txt contains the dataset for our linear regression problem. The first column is the population of a city (in 10,000s) and the second column is the profit of a food truck in that city (in $10,000s). A negative value for profit indicates a loss.
 
 You are provided with the code needed to load this data. The dataset is loaded from the data file into the variables x and y:
-\begin{verbatim}
+#+begin_src python
 import numpy as np
 import os
 # Read comma separated data
@@ -106,13 +72,12 @@ X, y = data[:, 0], data[:, 1]
 
 m = y.size  # number of training examples
 
-\end{verbatim}
-\subsection{Plotting the Data}
-\label{sec:orgd89a9ae}
-Before starting on any task, it is often useful to understand the data by visualizing it. For this dataset, you can use a scatter plot to visualize the data, since it has only two properties to plot (profit and population). Many other problems that you will encounter in real life are multi-dimensional and cannot be plotted on a 2-d plot. There are many plotting libraries in python (see this \href{https://mode.com/blog/python-data-visualization-libraries/}{blog} post for a good summary of the most popular ones).
+#+end_src
+** Plotting the Data
+Before starting on any task, it is often useful to understand the data by visualizing it. For this dataset, you can use a scatter plot to visualize the data, since it has only two properties to plot (profit and population). Many other problems that you will encounter in real life are multi-dimensional and cannot be plotted on a 2-d plot. There are many plotting libraries in python (see this [[https://mode.com/blog/python-data-visualization-libraries/][blog]] post for a good summary of the most popular ones).
 
 In this course, we will be mostly be using matplotlib to do all our plotting. matplotlib is one of the most popular scientific plotting libraries in python and has extensive tools and functions to make beautiful plots. pyplot is a module within matplotlib which provides a simplified interface to matplotlib's most common plotting tasks, mimicking MATLAB's plotting interface.
-\begin{verbatim}
+#+begin_src python
 
 from matplotlib.pyplot as plt
 def plotData(x, y):
@@ -148,34 +113,33 @@ def plotData(x, y):
 
 
     # =============================================================
-\end{verbatim}
-\subsection{Gradient Descent}
-\label{sec:org8744349}
-In this part, you will fit the linear regression parameters \(\theta\) to our dataset using gradient descent.
+#+end_src
+** Gradient Descent
+In this part, you will fit the linear regression parameters $\theta$ to our dataset using gradient descent.
 
 2.2.1 Update Equations
 The objective of linear regression is to minimize the cost function
 
 $$ J(\theta) = \frac{1}{2m} \sum_{i=1}^m \left( h_{\theta}(x^{(i)}) - y^{(i)}\right)^2$$
-where the hypothesis \(h_\theta(x)\) is given by the linear model$$ h_\theta(x) = \theta^Tx = \theta_0 + \theta_1 x_1$$
+where the hypothesis $h_\theta(x)$ is given by the linear model$$ h_\theta(x) = \theta^Tx = \theta_0 + \theta_1 x_1$$
 
-Recall that the parameters of your model are the \(\theta_j\) values. These are the values you will adjust to minimize cost \(J(\theta)\). One way to do this is to use the batch gradient descent algorithm. In batch gradient descent, each iteration performs the update
+Recall that the parameters of your model are the $\theta_j$ values. These are the values you will adjust to minimize cost $J(\theta)$. One way to do this is to use the batch gradient descent algorithm. In batch gradient descent, each iteration performs the update
 
 $$ \theta_j = \theta_j - \alpha \frac{1}{m} \sum_{i=1}^m \left( h_\theta(x^{(i)}) - y^{(i)}\right)x_j^{(i)} \qquad \text{simultaneously update } \theta_j \text{ for all } j$$
-With each step of gradient descent, your parameters \(\theta_j\) come closer to the optimal values that will achieve the lowest cost J(\(\theta\)).
+With each step of gradient descent, your parameters $\theta_j$ come closer to the optimal values that will achieve the lowest cost J($\theta$).
 
-\begin{quote}
-\textbf{Vectors and matrices in numpy - Important implementation notes}
+#+begin_quote
+*Vectors and matrices in numpy - Important implementation notes*
 
 A vector in numpy is a one dimensional array, for example np.array([1, 2, 3]) is a vector. A matrix in numpy is a two dimensional array, for example np.array([[1, 2, 3], [4, 5, 6]]). However, the following is still considered a matrix np.array(1, 2, 3) since it has two dimensions, even if it has a shape of 1x3 (which looks like a vector).
 
 Given the above, the function np.dot which we will use for all matrix/vector multiplication has the following properties:
 
 It always performs inner products on vectors. If x=np.array([1, 2, 3]), then np.dot(x, x) is a scalar.
-For matrix-vector multiplication, so if \(X\) is a \(m\times n\) matrix and \(y\) is a vector of length \(m\), then the operation np.dot(y, X) considers \(y\) as a \(1 \times m\) vector. On the other hand, if \(y\) is a vector of length \(n\), then the operation np.dot(X, y) considers \(y\) as a \(n \times 1\) vector.
-A vector can be promoted to a matrix using y[None] or [y[np.newaxis]. That is, if y = np.array([1, 2, 3]) is a vector of size 3, then y[None, :] is a matrix of shape \(1 \times 3\). We can use y[:, None] to obtain a shape of \(3 \times 1\).
-\end{quote}
-\begin{verbatim}
+For matrix-vector multiplication, so if $X$ is a $m\times n$ matrix and $y$ is a vector of length $m$, then the operation np.dot(y, X) considers $y$ as a $1 \times m$ vector. On the other hand, if $y$ is a vector of length $n$, then the operation np.dot(X, y) considers $y$ as a $n \times 1$ vector.
+A vector can be promoted to a matrix using y[None] or [y[np.newaxis]. That is, if y = np.array([1, 2, 3]) is a vector of size 3, then y[None, :] is a matrix of shape $1 \times 3$. We can use y[:, None] to obtain a shape of $3 \times 1$.
+#+end_quote
+#+begin_src python
 def gradientDescent(X, y, theta, alpha, num_iters):
     """
     Performs gradient descent to learn `theta`. Updates theta by taking `num_iters`
@@ -234,10 +198,10 @@ def gradientDescent(X, y, theta, alpha, num_iters):
 
     return theta, J_history
 
-\end{verbatim}
+#+end_src
 
-After you are finished call the implemented gradientDescent function and print the computed \(\theta\). We initialize the \(\theta\) parameters to 0 and the learning rate \(\alpha\) to 0.01. Execute the following cell to check your code.
-\begin{verbatim}
+After you are finished call the implemented gradientDescent function and print the computed $\theta$. We initialize the $\theta$ parameters to 0 and the learning rate $\alpha$ to 0.01. Execute the following cell to check your code.
+#+begin_src python
 
 # initialize fitting parameters
 theta = np.zeros(2)
@@ -251,27 +215,24 @@ print('Theta found by gradient descent: {:.4f}, {:.4f}'.format(*theta))
 print('Expected theta values (approximately): [-3.6303, 1.1664]')
 
 
-\end{verbatim}
-
+#+end_src
 We will use your final parameters to plot the linear fit.
-\begin{verbatim}
+#+begin_src python
 # plot the linear fit
 plotData(X[:, 1], y)
-plt.plot(X[:, 1], np.dot(X, theta), '-')
-plt.legend(['Training data', 'Linear regression']);
-\end{verbatim}
-\section{Linear regression with multiple variables}
-\label{sec:org7b5c4d5}
+pyplot.plot(X[:, 1], np.dot(X, theta), '-')
+pyplot.legend(['Training data', 'Linear regression']);
+#+end_src
+* Linear regression with multiple variables
 In this part, you will implement linear regression with multiple variables to predict the prices of houses. Suppose you are selling your house and you want to know what a good market price would be. One way to do this is to first collect information on recent houses sold and make a model of housing prices.
 
 The file Data/ex1data2.txt contains a training set of housing prices in Portland, Oregon. The first column is the size of the house (in square feet), the second column is the number of bedrooms, and the third column is the price of the house.
 
 
-\subsection{Feature Normalization}
-\label{sec:orgad2a47a}
+** Feature Normalization
 We start by loading and displaying some values from this dataset. By looking at the values, note that house sizes are about 1000 times the number of bedrooms. When features differ by orders of magnitude, first performing feature scaling can make gradient descent converge much more quickly.
 
-\begin{verbatim}
+#+begin_src python
 # Load data
 data = np.loadtxt(os.path.join('Data', 'ex1data2.txt'), delimiter=',')
 X = data[:, :2]
@@ -283,17 +244,17 @@ print('{:>8s}{:>8s}{:>10s}'.format('X[:,0]', 'X[:, 1]', 'y'))
 print('-'*26)
 for i in range(10):
     print('{:8.0f}{:8.0f}{:10.0f}'.format(X[i, 0], X[i, 1], y[i]))
-\end{verbatim}
+#+end_src
 Your task here is to complete the code in featureNormalize function:
 
 Subtract the mean value of each feature from the dataset.
 After subtracting the mean, additionally scale (divide) the feature values by their respective “standard deviations.”
 The standard deviation is a way of measuring how much variation there is in the range of values of a particular feature (most data points will lie within ±2 standard deviations of the mean); this is an alternative to taking the range of values (max-min). In numpy, you can use the std function to compute the standard deviation.
 
-For example, the quantity X[:, 0] contains all the values of \(x_1\) (house sizes) in the training set, so np.std(X[:, 0]) computes the standard deviation of the house sizes. At the time that the function featureNormalize is called, the extra column of 1’s corresponding to \(x_0 = 1\) has not yet been added to \(X\).
+For example, the quantity X[:, 0] contains all the values of $x_1$ (house sizes) in the training set, so np.std(X[:, 0]) computes the standard deviation of the house sizes. At the time that the function featureNormalize is called, the extra column of 1’s corresponding to $x_0 = 1$ has not yet been added to $X$.
 
-You will do this for all the features and your code should work with datasets of all sizes (any number of features / examples). Note that each column of the matrix \(X\) corresponds to one feature.
-\begin{verbatim}
+You will do this for all the features and your code should work with datasets of all sizes (any number of features / examples). Note that each column of the matrix $X$ corresponds to one feature.
+#+begin_src python
 def  featureNormalize(X):
     """
     Normalizes the features in X. returns a normalized version of X where
@@ -337,37 +298,36 @@ def  featureNormalize(X):
     # ================================================================
     return X_norm, mu, sigma
 
-\end{verbatim}
+#+end_src
 
 
 Execute the next cell to run the implemented featureNormalize function.
 In [ ]:
-\begin{verbatim}
+#+begin_src python
 
 # call featureNormalize on the loaded data
 X_norm, mu, sigma = featureNormalize(X)
 
 print('Computed mean:', mu)
 print('Computed standard deviation:', sigma)
-\end{verbatim}
+#+end_src
 
-After the featureNormalize function is tested, we now add the intercept term to X\textsubscript{norm}:
-\begin{verbatim}
+After the featureNormalize function is tested, we now add the intercept term to X_norm:
+#+begin_src python
 # Add intercept term to X
 X = np.concatenate([np.ones((m, 1)), X_norm], axis=1)
 
-\end{verbatim}
-\subsection{Gradient Descent}
-\label{sec:org3857e88}
+#+end_src
+** Gradient Descent
 
-Previously, you implemented gradient descent on a univariate regression problem. The only difference now is that there is one more feature in the matrix \(X\). The hypothesis function and the batch gradient descent update rule remain unchanged.
+Previously, you implemented gradient descent on a univariate regression problem. The only difference now is that there is one more feature in the matrix $X$. The hypothesis function and the batch gradient descent update rule remain unchanged.
 
 You should now creat functions computeCostMulti and gradientDescentMulti to implement the cost function and gradient descent for linear regression with multiple variables. If your code in the previous part (single variable) already supports multiple variables you can move on to testing it. Make sure your code supports any number of features and is well-vectorized. You can use the shape property of numpy arrays to find out how many features are present in the dataset.
-\begin{quote}
-\textbf{\textbf{Implementation Note:}} In the multivariate case, the cost function can also be written in the following vectorized form: $$ J(\theta) = \frac{1}{2m}(X\theta - \vec{y})^T(X\theta - \vec{y}) $$ where $$ X = \begin{pmatrix} - (x^{(1)})^T - \\ - (x^{(2)})^T - \\ \vdots \\ - (x^{(m)})^T - \\ \\ \end{pmatrix} \qquad \mathbf{y} = \begin{bmatrix} y^{(1)} \\ y^{(2)} \\ \vdots \\ y^{(m)} \\\end{bmatrix}$$ the vectorized version is efficient when you are working with numerical computing tools like `numpy`. If you are an expert with matrix operations, you can prove to yourself that the two forms are equivalent.
-\end{quote}
+#+begin_quote
+**Implementation Note:** In the multivariate case, the cost function can also be written in the following vectorized form: $$ J(\theta) = \frac{1}{2m}(X\theta - \vec{y})^T(X\theta - \vec{y}) $$ where $$ X = \begin{pmatrix} - (x^{(1)})^T - \\ - (x^{(2)})^T - \\ \vdots \\ - (x^{(m)})^T - \\ \\ \end{pmatrix} \qquad \mathbf{y} = \begin{bmatrix} y^{(1)} \\ y^{(2)} \\ \vdots \\ y^{(m)} \\\end{bmatrix}$$ the vectorized version is efficient when you are working with numerical computing tools like `numpy`. If you are an expert with matrix operations, you can prove to yourself that the two forms are equivalent.
+#+end_quote
 
-\begin{verbatim}
+#+begin_src python
 
 """
 Instructions
@@ -399,5 +359,6 @@ theta, J_history = gradientDescentMulti(X, y, theta, alpha, num_iters)
 plt.plot(np.arange(len(J_history)), J_history, lw=2)
 plt.xlabel('Number of iterations')
 plt.ylabel('Cost J')
-\end{verbatim}
-\end{document}
+#+end_src
+
+[fn:1] https://stackoverflow.com/questions/37356645/numpy-is-matrix-multiplication-faster-than-sum-of-a-vector

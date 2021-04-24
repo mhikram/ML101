@@ -1,13 +1,13 @@
 
 # Table of Contents
 
-1.  [Simple python and numpy function](#org1eeed7e)
-2.  [Linear regression with one variable](#org3ef14b2)
-    1.  [Plotting the Data](#org5372076)
-    2.  [Gradient Descent](#orga08943d)
-3.  [Linear regression with multiple variables](#org29e587d)
-    1.  [Feature Normalization](#org1846c11)
-    2.  [Gradient Descent](#org727c26d)
+1.  [Simple python and numpy function](#org3a984d3)
+2.  [Linear regression with one variable](#orgbece56b)
+    1.  [Plotting the Data](#orgc731754)
+    2.  [Gradient Descent](#org35cf8bf)
+3.  [Linear regression with multiple variables](#org058abf9)
+    1.  [Feature Normalization](#org226d25e)
+    2.  [Gradient Descent](#orgfc7299f)
 
 \clearpage
 In this exercise, you will implement linear regression and get to see it work on data.
@@ -93,7 +93,7 @@ All the information you need for solving this assignment is in directory.
 </table>
 
 
-<a id="org1eeed7e"></a>
+<a id="org3a984d3"></a>
 
 # Simple python and numpy function
 
@@ -132,7 +132,7 @@ The previous code block only defines the function warmUpExercise. Run it by exec
            [ 0.,  0.,  0.,  0.,  1.]])
 
 
-<a id="org3ef14b2"></a>
+<a id="orgbece56b"></a>
 
 # Linear regression with one variable
 
@@ -151,7 +151,7 @@ You are provided with the code needed to load this data. The dataset is loaded f
     m = y.size  # number of training examples
 
 
-<a id="org5372076"></a>
+<a id="orgc731754"></a>
 
 ## Plotting the Data
 
@@ -196,7 +196,7 @@ In this course, we will be mostly be using matplotlib to do all our plotting. ma
         # =============================================================
 
 
-<a id="orga08943d"></a>
+<a id="org35cf8bf"></a>
 
 ## Gradient Descent
 
@@ -264,8 +264,8 @@ With each step of gradient descent, your parameters \(\theta_j\) come closer to 
         # Initialize some useful values
         m = y.shape[0]  # number of training examples
     
-        # make a copy of theta, to avoid changing the original array, since numpy arrays
-        # are passed by reference to functions
+        # make a copy of theta, to avoid changing the original array,
+        #since numpy arrays are passed by reference to functions
         theta = theta.copy()
     
         J_history = [] # Use a python list to save cost in every iteration
@@ -299,11 +299,11 @@ We will use your final parameters to plot the linear fit.
 
     # plot the linear fit
     plotData(X[:, 1], y)
-    pyplot.plot(X[:, 1], np.dot(X, theta), '-')
-    pyplot.legend(['Training data', 'Linear regression']);
+    plt.plot(X[:, 1], np.dot(X, theta), '-')
+    plt.legend(['Training data', 'Linear regression']);
 
 
-<a id="org29e587d"></a>
+<a id="org058abf9"></a>
 
 # Linear regression with multiple variables
 
@@ -312,7 +312,7 @@ In this part, you will implement linear regression with multiple variables to pr
 The file Data/ex1data2.txt contains a training set of housing prices in Portland, Oregon. The first column is the size of the house (in square feet), the second column is the number of bedrooms, and the third column is the price of the house.
 
 
-<a id="org1846c11"></a>
+<a id="org226d25e"></a>
 
 ## Feature Normalization
 
@@ -399,7 +399,7 @@ After the featureNormalize function is tested, we now add the intercept term to 
     X = np.concatenate([np.ones((m, 1)), X_norm], axis=1)
 
 
-<a id="org727c26d"></a>
+<a id="orgfc7299f"></a>
 
 ## Gradient Descent
 

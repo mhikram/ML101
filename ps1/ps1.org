@@ -1,3 +1,6 @@
+#+LATEX_HEADER: \usepackage[margin=1.25in]{geometry}
+#+LATEX_HEADER: \usepackage{parskip}
+#+latex_class_options: [12pt]
 #+TITLE: Problem Set 1
 
 \clearpage
@@ -178,8 +181,8 @@ def gradientDescent(X, y, theta, alpha, num_iters):
     # Initialize some useful values
     m = y.shape[0]  # number of training examples
 
-    # make a copy of theta, to avoid changing the original array, since numpy arrays
-    # are passed by reference to functions
+    # make a copy of theta, to avoid changing the original array,
+    #since numpy arrays are passed by reference to functions
     theta = theta.copy()
 
     J_history = [] # Use a python list to save cost in every iteration
@@ -213,12 +216,15 @@ print('Expected theta values (approximately): [-3.6303, 1.1664]')
 
 
 #+end_src
+
+#+RESULTS:
+
 We will use your final parameters to plot the linear fit.
 #+begin_src python
 # plot the linear fit
 plotData(X[:, 1], y)
-pyplot.plot(X[:, 1], np.dot(X, theta), '-')
-pyplot.legend(['Training data', 'Linear regression']);
+plt.plot(X[:, 1], np.dot(X, theta), '-')
+plt.legend(['Training data', 'Linear regression']);
 #+end_src
 * Linear regression with multiple variables
 In this part, you will implement linear regression with multiple variables to predict the prices of houses. Suppose you are selling your house and you want to know what a good market price would be. One way to do this is to first collect information on recent houses sold and make a model of housing prices.
