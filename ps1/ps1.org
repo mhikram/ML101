@@ -13,7 +13,7 @@ All the information you need for solving this assignment is in directory.
 |       4 | Feature normalization                   | featureNormalize     |     10 |
 |       5 | Compute Cost for multiple variables     | computeCostMulti     |     20 |
 |       6 | Gradient descent for multiple variables | gradientDescentMulti |     20 |
-|         |                                         | Total Points         |    130 |
+|         |                                         | Total Points         |    150 |
 
 * Simple python and numpy function
 The first part of this assignment gives you practice with python and numpy syntax and the homework submission process. In the next code block, you will find the outline of a python function. Modify it to return a 5 x 5 identity matrix by filling in the following code:

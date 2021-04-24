@@ -1,13 +1,13 @@
 
 # Table of Contents
 
-1.  [Simple python and numpy function](#org6c9ae93)
-2.  [Linear regression with one variable](#org672dd81)
-    1.  [Plotting the Data](#org58acd94)
-    2.  [Gradient Descent](#org48d150f)
-3.  [Linear regression with multiple variables](#org865a94f)
-    1.  [Feature Normalization](#orgb4770c9)
-    2.  [Gradient Descent](#org8910476)
+1.  [Simple python and numpy function](#org1eeed7e)
+2.  [Linear regression with one variable](#org3ef14b2)
+    1.  [Plotting the Data](#org5372076)
+    2.  [Gradient Descent](#orga08943d)
+3.  [Linear regression with multiple variables](#org29e587d)
+    1.  [Feature Normalization](#org1846c11)
+    2.  [Gradient Descent](#org727c26d)
 
 \clearpage
 In this exercise, you will implement linear regression and get to see it work on data.
@@ -87,13 +87,13 @@ All the information you need for solving this assignment is in directory.
 <td class="org-right">&#xa0;</td>
 <td class="org-left">&#xa0;</td>
 <td class="org-left">Total Points</td>
-<td class="org-right">130</td>
+<td class="org-right">150</td>
 </tr>
 </tbody>
 </table>
 
 
-<a id="org6c9ae93"></a>
+<a id="org1eeed7e"></a>
 
 # Simple python and numpy function
 
@@ -132,7 +132,7 @@ The previous code block only defines the function warmUpExercise. Run it by exec
            [ 0.,  0.,  0.,  0.,  1.]])
 
 
-<a id="org672dd81"></a>
+<a id="org3ef14b2"></a>
 
 # Linear regression with one variable
 
@@ -151,7 +151,7 @@ You are provided with the code needed to load this data. The dataset is loaded f
     m = y.size  # number of training examples
 
 
-<a id="org58acd94"></a>
+<a id="org5372076"></a>
 
 ## Plotting the Data
 
@@ -196,7 +196,7 @@ In this course, we will be mostly be using matplotlib to do all our plotting. ma
         # =============================================================
 
 
-<a id="org48d150f"></a>
+<a id="orga08943d"></a>
 
 ## Gradient Descent
 
@@ -303,7 +303,7 @@ We will use your final parameters to plot the linear fit.
     pyplot.legend(['Training data', 'Linear regression']);
 
 
-<a id="org865a94f"></a>
+<a id="org29e587d"></a>
 
 # Linear regression with multiple variables
 
@@ -312,7 +312,7 @@ In this part, you will implement linear regression with multiple variables to pr
 The file Data/ex1data2.txt contains a training set of housing prices in Portland, Oregon. The first column is the size of the house (in square feet), the second column is the number of bedrooms, and the third column is the price of the house.
 
 
-<a id="orgb4770c9"></a>
+<a id="org1846c11"></a>
 
 ## Feature Normalization
 
@@ -399,7 +399,7 @@ After the featureNormalize function is tested, we now add the intercept term to 
     X = np.concatenate([np.ones((m, 1)), X_norm], axis=1)
 
 
-<a id="org8910476"></a>
+<a id="org727c26d"></a>
 
 ## Gradient Descent
 
